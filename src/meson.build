@@ -1,1 +1,1 @@
-scribbyd_sources = files(['scribbyd.c'])
+scribbyd_sources = files(['scribbyd.c', 'config.c'])
