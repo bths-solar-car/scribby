@@ -20,4 +20,7 @@
 #define TYPES_H
 
 
+typedef struct {
+} config_t;
+
 #endif /* TYPES_H */
