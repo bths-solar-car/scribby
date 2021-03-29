@@ -1,5 +1,8 @@
 project('scribby', 'c',
-	license : 'GPLv3',
+  license : 'GPLv3',
+  default_options : [
+    'c_std=c18'
+    ]
 )
 
 cc = meson.get_compiler('c')
