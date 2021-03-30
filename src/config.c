@@ -17,6 +17,9 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <yaml.h>
 
 #include "config.h"
 #include "types.h"
@@ -25,10 +28,29 @@
 /* load configuration options into memory */
 int config_load(config_t *in)
 {
+	/* prepare for possible cleanup */
 	FILE *file = NULL;
+	yaml_parser_t parser;
 
+	struct {
+		unsigned int parser_initialize : 1;
+	} state;
+	memset(&state, 0, sizeof(state));
+
+
+	/* prepare config for parsing */
 	file = fopen(in->config_path, "r");
-	if (file == NULL) return 0;
+	if (!file) goto error;
+
+	state.parser_initialize = yaml_parser_initialize(&parser);
+	if (!state.parser_initialize) goto error;
 
 	return 1;
+
+
+error:  /* cleanup */
+	if (!file) fclose(file);
+	if (!state.parser_initialize) yaml_parser_delete(&parser);
+
+	return 0;
 }
