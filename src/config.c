@@ -16,6 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <stdio.h>
+
 #include "config.h"
 #include "types.h"
 
@@ -23,5 +25,10 @@
 /* load configuration options into memory */
 int config_load(config_t *in)
 {
+	FILE *file = NULL;
+
+	file = fopen(in->config_path, "r");
+	if (file == NULL) return 0;
+
 	return 1;
 }
