@@ -22,6 +22,9 @@
 #include "types.h"
 
 
+#define DEFAULT_CONFIG_PATH "/etc/scribbyd/config.yml"
+
+
 int config_load(config_t *in);
 
 #endif /* CONFIG_H */
