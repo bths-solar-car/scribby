@@ -45,6 +45,11 @@ int config_load(config_t *in)
 	state.parser_initialize = yaml_parser_initialize(&parser);
 	if (!state.parser_initialize) goto error;
 
+
+	/* cleanup */
+	fclose(file);
+	yaml_parser_delete(&parser);
+
 	return 1;
 
 
