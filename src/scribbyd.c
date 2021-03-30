@@ -29,5 +29,9 @@ int main(int argc, char **argv)
 	};
 
 
+	/* load user setting overrides */
+	config_load(&options);
+
+
 	exit(EXIT_SUCCESS);
 }
