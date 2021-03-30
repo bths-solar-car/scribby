@@ -21,6 +21,7 @@
 
 
 typedef struct {
+	char *config_path;
 } config_t;
 
 #endif /* TYPES_H */
