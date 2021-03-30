@@ -18,8 +18,16 @@
 
 #include <stdlib.h>
 
+#include "config.h"
+
 
 int main(int argc, char **argv)
 {
+	/* set default daemon settings */
+	config_t options = {
+		.config_path = DEFAULT_CONFIG_PATH
+	};
+
+
 	exit(EXIT_SUCCESS);
 }
