@@ -17,3 +17,11 @@
  */
 
 #include "config.h"
+#include "types.h"
+
+
+/* load configuration options into memory */
+int config_load(config_t *in)
+{
+	return 1;
+}

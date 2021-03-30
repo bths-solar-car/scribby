@@ -22,4 +22,6 @@
 #include "types.h"
 
 
+int config_load(config_t *in);
+
 #endif /* CONFIG_H */
