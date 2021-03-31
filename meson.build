@@ -1,7 +1,7 @@
 project('scribby', 'c',
   license : 'GPLv3',
   default_options : [
-    'c_std=c18'
+    'c_std=gnu18'
     ]
 )
 
