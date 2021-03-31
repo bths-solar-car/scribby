@@ -16,9 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include <yaml.h>
 
 #include "config.h"
@@ -27,6 +29,13 @@
 /* load command-line arguments */
 int config_getopt(config_t *in, int argc, char **argv)
 {
+	/* available flags */
+	char *flags = "";
+	struct option long_flags[] = {
+		{0, 0, 0, 0}
+	};
+
+
 	return 1;
 }
 
