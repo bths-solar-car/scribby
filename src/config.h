@@ -1,5 +1,5 @@
 /*
- * scribbyd
+ * config.h -- configure scribby
  * Copyright (C) 2021  Jacob Koziej <jacobkoziej@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,22 +16,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <stdlib.h>
-
-#include "config.h"
-
-
-int main(int argc, char **argv)
-{
-	/* set default daemon settings */
-	config_t options = {
-		.config_path = DEFAULT_CONFIG_PATH
-	};
+#ifndef CONFIG_H
+#define CONFIG_H
 
 
-	/* load user setting overrides */
-	config_load(&options);
+#define DEFAULT_CONFIG_PATH "/etc/scribbyd/config.yml"
 
 
-	exit(EXIT_SUCCESS);
-}
+typedef struct {
+	char *config_path;
+} config_t;
+
+
+/*
+ * Load the configuration file.
+ *
+ * The configuration file specified in the passed config_t is parsed.  Options
+ * in memory are only changed if the parsing was successful.
+ *
+ * returns 1 on success, 0 on failure
+ */
+int config_load(config_t *in);
+
+#endif /* CONFIG_H */
