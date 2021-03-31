@@ -30,9 +30,11 @@ int config_load(config_t *in)
 	/* prepare for possible cleanup */
 	FILE *file = NULL;
 	yaml_parser_t parser;
+	yaml_event_t  event;
 
 	struct {
 		unsigned int parser_initialize : 1;
+		unsigned int parser_parse : 1;
 	} state;
 	memset(&state, 0, sizeof(state));
 
@@ -44,10 +46,55 @@ int config_load(config_t *in)
 	state.parser_initialize = yaml_parser_initialize(&parser);
 	if (!state.parser_initialize) goto error;
 
+	yaml_parser_set_input_file(&parser, file);
+
+
+	/* parse config */
+	do {
+		// get the next event
+		yaml_event_delete(&event);  // buf can be unallocated when run
+		state.parser_parse = yaml_parser_parse(&parser, &event);
+		if (!state.parser_parse) goto error;
+
+		switch (event.type) {
+			case YAML_NO_EVENT:
+				break;
+
+			case YAML_STREAM_START_EVENT:
+				break;
+			case YAML_STREAM_END_EVENT:
+				break;
+
+			case YAML_DOCUMENT_START_EVENT:
+				break;
+			case YAML_DOCUMENT_END_EVENT:
+				break;
+
+			case YAML_SEQUENCE_START_EVENT:
+				break;
+			case YAML_SEQUENCE_END_EVENT:
+				break;
+
+			case YAML_MAPPING_START_EVENT:
+				break;
+			case YAML_MAPPING_END_EVENT:
+				break;
+
+			case YAML_ALIAS_EVENT:
+				break;
+			case YAML_SCALAR_EVENT:
+				break;
+
+			default:
+				goto error;
+		}
+	} while (event.type != YAML_STREAM_END_EVENT);
+
 
 	/* cleanup */
 	fclose(file);
 	yaml_parser_delete(&parser);
+	yaml_event_delete(&event);
 
 	return 1;
 
@@ -55,6 +102,7 @@ int config_load(config_t *in)
 error:  /* cleanup */
 	if (!file) fclose(file);
 	if (!state.parser_initialize) yaml_parser_delete(&parser);
+	if (!state.parser_parse) yaml_event_delete(&event);
 
 	return 0;
 }
