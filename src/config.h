@@ -28,6 +28,14 @@ typedef struct {
 } config_t;
 
 
+/*
+ * Load the configuration file.
+ *
+ * The configuration file specified in the passed config_t is parsed.  Options
+ * in memory are only changed if the parsing was successful.
+ *
+ * returns 1 on success, 0 on failure
+ */
 int config_load(config_t *in);
 
 #endif /* CONFIG_H */
