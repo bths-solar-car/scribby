@@ -36,7 +36,7 @@ int config_load(config_t *in)
 		unsigned int parser_initialize : 1;
 		unsigned int parser_parse : 1;
 	} state;
-	memset(&state, 0, sizeof(state));
+	memset(&state, 0xFF, sizeof(state));  // errors are always zero
 
 
 	/* prepare config for parsing */
@@ -100,7 +100,7 @@ int config_load(config_t *in)
 
 
 error:  /* cleanup */
-	if (!file) fclose(file);
+	if (file) fclose(file);
 	if (!state.parser_initialize) yaml_parser_delete(&parser);
 	if (!state.parser_parse) yaml_event_delete(&event);
 
