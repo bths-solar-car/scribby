@@ -19,10 +19,13 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include "types.h"
-
 
 #define DEFAULT_CONFIG_PATH "/etc/scribbyd/config.yml"
+
+
+typedef struct {
+	char *config_path;
+} config_t;
 
 
 int config_load(config_t *in);
