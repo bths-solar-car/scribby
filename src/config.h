@@ -29,6 +29,17 @@ typedef struct {
 
 
 /*
+ * Load command-line arguments.
+ *
+ * Command-line arguments passed at runtime are parsed and loaded into the
+ * passed config_t.  Options in memory are only changed if parsing was
+ * successful.
+ *
+ * returns 1 on success, 0 on failure
+ */
+int config_getopt(config_t *in, int argc, char **argv);
+
+/*
  * Load the configuration file.
  *
  * The configuration file specified in the passed config_t is parsed.  Options

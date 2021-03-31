@@ -24,6 +24,12 @@
 #include "config.h"
 
 
+/* load command-line arguments */
+int config_getopt(config_t *in, int argc, char **argv)
+{
+	return 1;
+}
+
 /* load configuration options into memory */
 int config_load(config_t *in)
 {
