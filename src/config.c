@@ -32,6 +32,8 @@ int config_load(config_t *in)
 	yaml_parser_t parser;
 	yaml_event_t  event;
 
+	config_t temp = *in;
+
 	struct {
 		unsigned int parser_initialize : 1;
 		unsigned int parser_parse : 1;
@@ -40,7 +42,7 @@ int config_load(config_t *in)
 
 
 	/* prepare config for parsing */
-	file = fopen(in->config_path, "r");
+	file = fopen(temp.config_path, "r");
 	if (!file) goto error;
 
 	state.parser_initialize = yaml_parser_initialize(&parser);
@@ -96,6 +98,7 @@ int config_load(config_t *in)
 	yaml_parser_delete(&parser);
 	yaml_event_delete(&event);
 
+	*in = temp;
 	return 1;
 
 
