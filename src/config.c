@@ -16,13 +16,47 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include <yaml.h>
 
 #include "config.h"
 
+
+/* load command-line arguments */
+int config_getopt(config_t *in, int argc, char **argv)
+{
+	/* available flags */
+	char *flags = "";
+	struct option long_flags[] = {
+		{0, 0, 0, 0}
+	};
+
+	config_t temp = *in;
+
+
+	/* parse flags */
+	while (1) {
+		int opt, long_index;
+		opt = getopt_long(argc, argv, flags, long_flags, &long_index);
+
+		if (opt == -1) break;  // no more flags
+
+		switch (opt) {
+			// invalid option
+			case '?':
+			default:
+				return 0;
+		}
+	}
+
+
+	*in = temp;
+	return 1;
+}
 
 /* load configuration options into memory */
 int config_load(config_t *in)

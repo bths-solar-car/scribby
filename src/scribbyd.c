@@ -30,6 +30,7 @@ int main(int argc, char **argv)
 
 
 	/* load user setting overrides */
+	config_getopt(&options, argc, argv);
 	config_load(&options);
 
 
