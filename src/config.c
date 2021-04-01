@@ -36,6 +36,22 @@ int config_getopt(config_t *in, int argc, char **argv)
 	};
 
 
+	/* parse flags */
+	while (1) {
+		int opt, long_index;
+		opt = getopt_long(argc, argv, flags, long_flags, &long_index);
+
+		if (opt == -1) break;  // no more flags
+
+		switch (opt) {
+			// invalid option
+			case '?':
+			default:
+				return 0;
+		}
+	}
+
+
 	return 1;
 }
 
