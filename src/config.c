@@ -35,6 +35,8 @@ int config_getopt(config_t *in, int argc, char **argv)
 		{0, 0, 0, 0}
 	};
 
+	config_t temp = *in;
+
 
 	/* parse flags */
 	while (1) {
@@ -52,6 +54,7 @@ int config_getopt(config_t *in, int argc, char **argv)
 	}
 
 
+	*in = temp;
 	return 1;
 }
 
