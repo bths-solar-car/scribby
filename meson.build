@@ -33,4 +33,10 @@ install_subdir(
   install_dir: join_paths(get_option('sysconfdir'), 'scribbyd')
 )
 
-executable('scribbyd', sources : scribbyd_sources, dependencies : libyaml, install : true)
+# daemon
+executable(
+  'scribbyd',
+  sources: scribbyd_sources,
+  dependencies: libyaml,
+  install: true
+)
