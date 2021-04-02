@@ -13,18 +13,20 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-project('scribby', 'c',
-  license : 'GPLv3',
-  default_options : [
+project(
+  'scribby',
+  'c',
+  license: 'GPLv3',
+  default_options: [
     'c_std=gnu18'
-    ]
+  ]
 )
 
 cc = meson.get_compiler('c')
 
-subdir('src')
+libyaml = cc.find_library('yaml', required: true)
 
-libyaml = cc.find_library('yaml', required : true)
+subdir('src')
 
 # configs
 install_subdir(
