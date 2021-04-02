@@ -26,4 +26,11 @@ subdir('src')
 
 libyaml = cc.find_library('yaml', required : true)
 
-executable('scribbyd', sources : scribbyd_sources, dependencies : libyaml)
+# configs
+install_subdir(
+  'etc',
+  strip_directory: true,
+  install_dir: join_paths(get_option('sysconfdir'), 'scribbyd')
+)
+
+executable('scribbyd', sources : scribbyd_sources, dependencies : libyaml, install : true)
