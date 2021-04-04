@@ -31,9 +31,11 @@ bindir     = get_option('bindir')
 sysconfdir = get_option('sysconfdir')
 
 
+# dependencies
 libyaml = cc.find_library('yaml', required: true)
 
 
+# sub directories
 subdir('src')
 
 
