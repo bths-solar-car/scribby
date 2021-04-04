@@ -54,3 +54,14 @@ executable(
   dependencies: libyaml,
   install: true
 )
+
+
+# summaries
+summary(
+    {
+        'prefix': prefix,
+        'bindir': join_paths(prefix, bindir),
+        'sysconfdir': join_paths(prefix, sysconfdir)
+    },
+    section: 'DIRECTORIES'
+)
