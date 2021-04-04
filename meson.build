@@ -23,18 +23,27 @@ project(
   ]
 )
 
+
 cc = meson.get_compiler('c')
+
+prefix     = get_option('prefix')
+bindir     = get_option('bindir')
+sysconfdir = get_option('sysconfdir')
+
 
 libyaml = cc.find_library('yaml', required: true)
 
+
 subdir('src')
+
 
 # configs
 install_subdir(
   'etc',
   strip_directory: true,
-  install_dir: join_paths(get_option('sysconfdir'), 'scribbyd')
+  install_dir: join_paths(sysconfdir, 'scribbyd')
 )
+
 
 # daemon
 executable(
