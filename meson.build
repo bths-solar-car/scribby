@@ -16,6 +16,7 @@
 project(
   'scribby',
   'c',
+  version: '0.0.0',
   license: 'GPLv3',
   default_options: [
     'c_std=gnu18'
