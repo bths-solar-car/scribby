@@ -76,7 +76,10 @@ int config_load(config_t *in)
 
 
 	/* prepare config for parsing */
-	file = fopen(temp.config_path, "r");
+	file = fopen(
+		temp.config_path ? temp.config_path : DEFAULT_CONFIG_PATH,
+		"r"  // load default config if not specified
+	);
 	if (!file) goto error;
 
 	state.parser_initialize = yaml_parser_initialize(&parser);
