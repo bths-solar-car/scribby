@@ -150,4 +150,5 @@ error:  /* cleanup */
 /* initialize program configuration */
 void config_init(config_t *in)
 {
+	in->config_path = NULL;
 }

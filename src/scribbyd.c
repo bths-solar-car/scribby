@@ -23,13 +23,9 @@
 
 int main(int argc, char **argv)
 {
-	/* set default daemon settings */
-	config_t options = {
-		.config_path = NULL
-	};
-
-
 	/* load user setting overrides */
+	config_t options;
+	config_init(&options);
 	config_getopt(&options, argc, argv);
 	config_load(&options);
 
