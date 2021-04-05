@@ -62,6 +62,13 @@ executable(
 
 # summaries
 summary(
+  {
+    'program name': get_option('program_name')
+  },
+  section: 'OPTIONS'
+)
+
+summary(
     {
         'prefix': prefix,
         'bindir': join_paths(prefix, bindir),
