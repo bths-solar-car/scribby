@@ -30,8 +30,9 @@
 int config_getopt(config_t *in, int argc, char **argv)
 {
 	/* available flags */
-	char *flags = "";
+	char *flags = "c:";
 	struct option long_flags[] = {
+		{"config-path", required_argument, NULL, 'c'},
 		{0, 0, 0, 0}
 	};
 
@@ -46,6 +47,11 @@ int config_getopt(config_t *in, int argc, char **argv)
 		if (opt == -1) break;  // no more flags
 
 		switch (opt) {
+			// config path
+			case 'c':
+				temp.config_path = strdup(optarg);
+				break;
+
 			// invalid option
 			case '?':
 			default:
