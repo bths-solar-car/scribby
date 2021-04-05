@@ -150,6 +150,10 @@ error:  /* cleanup */
 /* clear program configuration */
 void config_del(config_t *in)
 {
+	if (in->config_path) {
+		free(in->config_path);
+		in->config_path = NULL;
+	}
 }
 
 /* initialize program configuration */
