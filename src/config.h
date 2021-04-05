@@ -49,4 +49,11 @@ int config_getopt(config_t *in, int argc, char **argv);
  */
 int config_load(config_t *in);
 
+/*
+ * Initialize program configuration.
+ *
+ * Load the default program configuration into memory.
+ */
+void config_init(config_t *in);
+
 #endif /* CONFIG_H */

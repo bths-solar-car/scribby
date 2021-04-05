@@ -146,3 +146,8 @@ error:  /* cleanup */
 
 	return 0;
 }
+
+/* initialize program configuration */
+void config_init(config_t *in)
+{
+}
