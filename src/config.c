@@ -49,6 +49,7 @@ int config_getopt(config_t *in, int argc, char **argv)
 		switch (opt) {
 			// config path
 			case 'c':
+				free(temp.config_path);  // prevent leaks
 				temp.config_path = strdup(optarg);
 				break;
 
