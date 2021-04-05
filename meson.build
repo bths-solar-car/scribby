@@ -31,6 +31,10 @@ bindir     = get_option('bindir')
 sysconfdir = get_option('sysconfdir')
 
 
+# options
+program_name = get_option('program_name')
+
+
 # dependencies
 libyaml = cc.find_library('yaml', required: true)
 
@@ -43,13 +47,13 @@ subdir('src')
 install_subdir(
   'etc',
   strip_directory: true,
-  install_dir: join_paths(sysconfdir, 'scribbyd')
+  install_dir: join_paths(sysconfdir, program_name)
 )
 
 
 # daemon
 executable(
-  'scribbyd',
+  program_name + 'd',
   sources: scribbyd_sources,
   dependencies: libyaml,
   install: true
