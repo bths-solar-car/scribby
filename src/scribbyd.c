@@ -30,5 +30,9 @@ int main(int argc, char **argv)
 	config_load(&options);
 
 
+	/* cleanup */
+	config_del(&options);
+
+
 	exit(EXIT_SUCCESS);
 }
