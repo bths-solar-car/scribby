@@ -147,6 +147,11 @@ error:  /* cleanup */
 	return 0;
 }
 
+/* clear program configuration */
+void config_del(config_t *in)
+{
+}
+
 /* initialize program configuration */
 void config_init(config_t *in)
 {

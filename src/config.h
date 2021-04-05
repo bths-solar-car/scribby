@@ -49,6 +49,14 @@ int config_getopt(config_t *in, int argc, char **argv);
  */
 int config_load(config_t *in);
 
+
+/*
+ * Clear program configuration.
+ *
+ * Free program configuration from memory where possible.
+ */
+void config_del(config_t *in);
+
 /*
  * Initialize program configuration.
  *
