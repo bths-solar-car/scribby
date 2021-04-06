@@ -54,6 +54,7 @@ install_subdir(
 # daemon
 executable(
   program_name + 'd',
+  c_args: scribbyd_args,
   sources: scribbyd_sources,
   dependencies: libyaml,
   install: true
