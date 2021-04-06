@@ -35,6 +35,10 @@ sysconfdir = get_option('sysconfdir')
 program_name = get_option('program_name')
 
 
+# QOL concatenations
+conf_dir = join_paths(prefix, join_paths(sysconfdir, program_name))
+
+
 # dependencies
 libyaml = cc.find_library('yaml', required: true)
 
@@ -47,7 +51,7 @@ subdir('src')
 install_subdir(
   'etc',
   strip_directory: true,
-  install_dir: join_paths(sysconfdir, program_name)
+  install_dir: conf_dir
 )
 
 
