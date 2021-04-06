@@ -51,6 +51,7 @@ int config_getopt(config_t *in, int argc, char **argv)
 			case 'c':
 				free(temp.config_path);  // prevent leaks
 				temp.config_path = strdup(optarg);
+				if (!temp.config_path) return 0;
 				break;
 
 			// invalid option
