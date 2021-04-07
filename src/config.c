@@ -66,6 +66,15 @@ int config_getopt(config_t *in, int argc, char **argv)
 	return 1;
 }
 
+/* initialize program configuration */
+int config_init(config_t *in, char *config_path)
+{
+	in->config_path = strdup(config_path);
+	if (!in->config_path) return 0;
+
+	return 1;
+}
+
 /* load configuration options into memory */
 int config_load(config_t *in)
 {
@@ -84,10 +93,7 @@ int config_load(config_t *in)
 
 
 	/* prepare config for parsing */
-	file = fopen(
-		temp.config_path ? temp.config_path : SCRIBBYD_CONFIG_PATH,
-		"r"  // load default config if not specified
-	);
+	file = fopen(temp.config_path, "r");
 	if (!file) goto error;
 
 	state.parser_initialize = yaml_parser_initialize(&parser);
@@ -159,11 +165,5 @@ error:  /* cleanup */
 void config_del(config_t *in)
 {
 	free(in->config_path);
-	in->config_path = NULL;
-}
-
-/* initialize program configuration */
-void config_init(config_t *in)
-{
 	in->config_path = NULL;
 }

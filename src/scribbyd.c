@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 {
 	/* load user setting overrides */
 	config_t options;
-	config_init(&options);
+	config_init(&options, SCRIBBYD_CONFIG_PATH);
 	config_getopt(&options, argc, argv);
 	config_load(&options);
 

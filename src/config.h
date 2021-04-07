@@ -40,6 +40,15 @@ typedef struct {
 int config_getopt(config_t *in, int argc, char **argv);
 
 /*
+ * Initialize program configuration.
+ *
+ * Load the default program configuration into memory.
+ *
+ * returns 1 on success, 0 on failure
+ */
+int config_init(config_t *in, char *config_path);
+
+/*
  * Load the configuration file.
  *
  * The configuration file specified in the passed config_t is parsed.  Options
@@ -55,12 +64,5 @@ int config_load(config_t *in);
  * Free program configuration from memory where possible.
  */
 void config_del(config_t *in);
-
-/*
- * Initialize program configuration.
- *
- * Load the default program configuration into memory.
- */
-void config_init(config_t *in);
 
 #endif /* CONFIG_H */
