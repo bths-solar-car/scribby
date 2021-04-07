@@ -20,7 +20,7 @@
 #define CONFIG_H
 
 
-#define DEFAULT_CONFIG_PATH "/etc/scribbyd/config.yml"
+#define SCRIBBYD_CONFIG_PATH CONF_DIR "/" PROGRAM_NAME "d_config.yml"
 
 
 typedef struct {
