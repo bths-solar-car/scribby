@@ -44,15 +44,8 @@ libyaml = cc.find_library('yaml', required: true)
 
 
 # sub directories
+subdir('etc')
 subdir('src')
-
-
-# configs
-install_subdir(
-  'etc',
-  strip_directory: true,
-  install_dir: conf_dir
-)
 
 
 # daemon
