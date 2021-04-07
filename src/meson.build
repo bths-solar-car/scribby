@@ -17,7 +17,7 @@ define_str = '-D@0@="@1@"'
 
 scribbyd_args = [
   define_str.format('CONF_DIR',     conf_dir),
-  define_str.format('PROGRAM_NAME', program_name + 'd'),
+  define_str.format('PROGRAM_NAME', program_name),
   define_str.format('VERSION',      meson.project_version())
 ]
 
