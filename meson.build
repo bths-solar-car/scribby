@@ -31,25 +31,27 @@ bindir     = get_option('bindir')
 sysconfdir = get_option('sysconfdir')
 
 
+# options
+program_name = get_option('program_name')
+
+
+# QOL concatenations
+conf_dir = join_paths(prefix, join_paths(sysconfdir, program_name))
+
+
 # dependencies
 libyaml = cc.find_library('yaml', required: true)
 
 
 # sub directories
+subdir('etc')
 subdir('src')
-
-
-# configs
-install_subdir(
-  'etc',
-  strip_directory: true,
-  install_dir: join_paths(sysconfdir, 'scribbyd')
-)
 
 
 # daemon
 executable(
-  'scribbyd',
+  program_name + 'd',
+  c_args: scribbyd_args,
   sources: scribbyd_sources,
   dependencies: libyaml,
   install: true
@@ -58,10 +60,17 @@ executable(
 
 # summaries
 summary(
-    {
-        'prefix': prefix,
-        'bindir': join_paths(prefix, bindir),
-        'sysconfdir': join_paths(prefix, sysconfdir)
-    },
-    section: 'DIRECTORIES'
+  {
+    'program name': get_option('program_name')
+  },
+  section: 'OPTIONS'
+)
+
+summary(
+  {
+    'prefix': prefix,
+    'bindir': join_paths(prefix, bindir),
+    'sysconfdir': join_paths(prefix, sysconfdir)
+  },
+  section: 'DIRECTORIES'
 )

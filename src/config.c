@@ -30,8 +30,9 @@
 int config_getopt(config_t *in, int argc, char **argv)
 {
 	/* available flags */
-	char *flags = "";
+	char *flags = "c:";
 	struct option long_flags[] = {
+		{"config-path", required_argument, NULL, 'c'},
 		{0, 0, 0, 0}
 	};
 
@@ -46,6 +47,13 @@ int config_getopt(config_t *in, int argc, char **argv)
 		if (opt == -1) break;  // no more flags
 
 		switch (opt) {
+			// config path
+			case 'c':
+				free(temp.config_path);  // prevent leaks
+				temp.config_path = strdup(optarg);
+				if (!temp.config_path) return 0;
+				break;
+
 			// invalid option
 			case '?':
 			default:
@@ -55,6 +63,15 @@ int config_getopt(config_t *in, int argc, char **argv)
 
 
 	*in = temp;
+	return 1;
+}
+
+/* initialize program configuration */
+int config_init(config_t *in, char *config_path)
+{
+	in->config_path = strdup(config_path);
+	if (!in->config_path) return 0;
+
 	return 1;
 }
 
@@ -142,4 +159,11 @@ error:  /* cleanup */
 	if (!state.parser_parse) yaml_event_delete(&event);
 
 	return 0;
+}
+
+/* clear program configuration */
+void config_del(config_t *in)
+{
+	free(in->config_path);
+	in->config_path = NULL;
 }

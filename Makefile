@@ -13,15 +13,31 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-define_str = '-D@0@="@1@"'
+JOBS != nproc
 
-scribbyd_args = [
-  define_str.format('CONF_DIR',     conf_dir),
-  define_str.format('PROGRAM_NAME', program_name),
-  define_str.format('VERSION',      meson.project_version())
-]
+MESON  ?= meson
+NINJA  ?= ninja
+NFLAGS ?= -j$(JOBS)
 
-scribbyd_sources = files(
-  'scribbyd.c',
-  'config.c'
-)
+BUILD ?= build
+
+
+.PHONY: all
+all:
+	@$(NINJA) $(NFLAGS) -C $(BUILD)
+
+.PHONY: install
+install:
+	@DESTDIR=$(DESTDIR) $(NINJA) $(NFLAGS) install -C $(BUILD)
+
+.PHONY: uninstall
+uninstall:
+	@DESTDIR=$(DESTDIR) $(NINJA) $(NFLAGS) uninstall -C $(BUILD)
+
+.PHONY: configure
+configure:
+	@$(MESON) $(MFLAGS) $(BUILD)
+
+.PHONY: clean
+clean:
+	@rm -vrf $(BUILD)

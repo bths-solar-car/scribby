@@ -13,15 +13,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-define_str = '-D@0@="@1@"'
-
-scribbyd_args = [
-  define_str.format('CONF_DIR',     conf_dir),
-  define_str.format('PROGRAM_NAME', program_name),
-  define_str.format('VERSION',      meson.project_version())
-]
-
-scribbyd_sources = files(
-  'scribbyd.c',
-  'config.c'
+option(
+  'program_name',
+  type: 'string',
+  value: 'scribby',
+  description: 'program name'
 )

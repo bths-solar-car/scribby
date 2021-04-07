@@ -20,7 +20,7 @@
 #define CONFIG_H
 
 
-#define DEFAULT_CONFIG_PATH "/etc/scribbyd/config.yml"
+#define SCRIBBYD_CONFIG_PATH CONF_DIR "/" PROGRAM_NAME "d_config.yml"
 
 
 typedef struct {
@@ -40,6 +40,15 @@ typedef struct {
 int config_getopt(config_t *in, int argc, char **argv);
 
 /*
+ * Initialize program configuration.
+ *
+ * Load the default program configuration into memory.
+ *
+ * returns 1 on success, 0 on failure
+ */
+int config_init(config_t *in, char *config_path);
+
+/*
  * Load the configuration file.
  *
  * The configuration file specified in the passed config_t is parsed.  Options
@@ -48,5 +57,12 @@ int config_getopt(config_t *in, int argc, char **argv);
  * returns 1 on success, 0 on failure
  */
 int config_load(config_t *in);
+
+/*
+ * Clear program configuration.
+ *
+ * Free program configuration from memory where possible.
+ */
+void config_del(config_t *in);
 
 #endif /* CONFIG_H */
