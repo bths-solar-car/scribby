@@ -91,3 +91,10 @@ summary(
   },
   section: 'DIRECTORIES'
 )
+
+summary(
+  {
+    'systemd integration': systemd.found()
+  },
+  section: 'FEATURES'
+)
