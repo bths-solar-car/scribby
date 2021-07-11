@@ -19,3 +19,10 @@ option(
   value: 'scribby',
   description: 'program name'
 )
+
+option(
+  'systemd',
+  type: 'feature',
+  value: 'auto',
+  description: 'systemd integration'
+)
