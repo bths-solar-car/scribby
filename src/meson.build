@@ -21,6 +21,10 @@ scribbyd_args = [
   define_str.format('VERSION',      meson.project_version())
 ]
 
+if systemd.found() and not get_option('systemd').disabled()
+  scribbyd_args += '-DSYSTEMD'
+endif
+
 scribbyd_sources = files(
   'scribbyd.c',
   'config.c'
