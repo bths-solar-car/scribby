@@ -1,0 +1,11 @@
+[Unit]
+Description=@Description@
+
+[Service]
+Type=simple
+ExecStart=@ExecStart@
+ExecReload=kill -HUP $MAINPID
+Restart=always
+
+[Install]
+WantedBy=default.target
