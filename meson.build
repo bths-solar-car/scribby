@@ -54,6 +54,7 @@ systemd = dependency(
 # sub directories
 subdir('etc')
 subdir('src')
+subdir('systemd')
 
 
 # daemon
