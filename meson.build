@@ -52,6 +52,7 @@ systemd = dependency(
 
 
 # sub directories
+subdir('bin')
 subdir('etc')
 subdir('src')
 subdir('systemd')
