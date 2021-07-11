@@ -67,9 +67,18 @@ executable(
 
 
 # summaries
+if get_option('systemd').auto()
+  systemd_integration = 'auto'
+elif get_option('systemd').enabled()
+  systemd_integration = 'enabled'
+else
+  systemd_integration = 'disabled'
+endif
+
 summary(
   {
-    'program name': get_option('program_name')
+    'program name':        get_option('program_name'),
+    'systemd integration': systemd_integration
   },
   section: 'OPTIONS'
 )
