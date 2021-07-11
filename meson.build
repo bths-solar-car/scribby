@@ -40,7 +40,15 @@ conf_dir = join_paths(prefix, join_paths(sysconfdir, program_name))
 
 
 # dependencies
-libyaml = cc.find_library('yaml', required: true)
+libyaml = cc.find_library(
+  'yaml',
+  required: true
+)
+
+systemd = dependency(
+  'systemd',
+  required: get_option('systemd')
+)
 
 
 # sub directories
