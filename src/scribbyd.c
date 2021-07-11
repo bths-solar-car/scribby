@@ -17,12 +17,39 @@
  */
 
 #include <stdlib.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 #include "config.h"
 
 
 int main(int argc, char **argv)
 {
+#ifndef SYSTEMD
+	/* SysV daemonization */
+	switch (fork()) {
+		case -1: return EXIT_FAILURE;
+		case 0:  break;
+		default: return EXIT_SUCCESS;
+	}
+
+	if (setsid() < 0) return EXIT_FAILURE;
+
+	switch (fork()) {
+		case -1: return EXIT_FAILURE;
+		case 0:  break;
+		default: return EXIT_SUCCESS;
+	}
+
+	umask(0);
+	chdir("/");
+
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	close(STDERR_FILENO);
+#endif /* SYSTEMD */
+
+
 	/* load user setting overrides */
 	config_t options;
 	config_init(&options, SCRIBBYD_CONFIG_PATH);
